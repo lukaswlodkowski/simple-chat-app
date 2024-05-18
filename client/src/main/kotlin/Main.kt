@@ -8,6 +8,7 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
+//TODO: when server shuts down, try to reconnect to it whenever available.
 fun main() {
     val client = HttpClient {
         install(WebSockets)

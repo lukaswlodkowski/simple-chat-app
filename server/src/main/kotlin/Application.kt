@@ -2,6 +2,7 @@ package org.example
 
 import io.ktor.server.application.*
 import org.example.plugins.configureDI
+import org.example.plugins.configureDatabases
 import org.example.plugins.configureRouting
 import org.example.plugins.configureSockets
 
@@ -11,4 +12,5 @@ fun Application.module() {
     configureDI()
     configureRouting()
     configureSockets()
+    configureDatabases()
 }

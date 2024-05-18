@@ -5,10 +5,12 @@ import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import io.ktor.websocket.*
 import org.example.Connection
+import org.example.history.HistoryService
 import java.time.Duration
 import java.util.*
+import org.koin.ktor.ext.get
 
-fun Application.configureSockets() {
+fun Application.configureSockets(historyService: HistoryService = get()) {
     install(WebSockets) {
         pingPeriod = Duration.ofSeconds(15)
         timeout = Duration.ofSeconds(15)
@@ -26,6 +28,7 @@ fun Application.configureSockets() {
                 for (frame in incoming) {
                     frame as? Frame.Text ?: continue
                     val receivedText = frame.readText()
+                    historyService.createHistoryLog(receivedText)
                     val textWithUsername = "[${thisConnection.name}]: $receivedText"
                     connections.forEach {
                         it.session.send(textWithUsername)
