@@ -1,4 +1,4 @@
-package org.example.history
+package org.example.chat.history
 
 import org.example.model.ConversationHistoryEntity
 import org.example.model.ConversationHistoryTable
