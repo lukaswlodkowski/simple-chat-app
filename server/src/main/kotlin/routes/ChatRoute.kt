@@ -43,6 +43,7 @@ fun Routing.chatRoute(
             } finally {
                 logger.info("Removing $thisConnection!")
                 connections -= thisConnection
+                sessionManager.removeSession(thisConnection.name)
             }
         }
     }
