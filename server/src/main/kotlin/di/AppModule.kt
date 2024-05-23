@@ -1,6 +1,7 @@
-package org.example.plugins.di
+package di
 
 import org.example.chat.SessionManager
+import org.example.chat.command.ExitCommand
 import org.example.chat.command.MessageCommandProcessor
 import org.example.chat.history.HistoryRepository
 import org.example.chat.history.HistoryService
@@ -16,8 +17,11 @@ val appModule = module {
     single<SessionManager> {
         SessionManager()
     }
+    single<ExitCommand> {
+        ExitCommand(sessionManager = get())
+    }
     single<MessageCommandProcessor> {
-        MessageCommandProcessor(sessionManager = get())
+        MessageCommandProcessor(exitCommand = get())
     }
 
 }

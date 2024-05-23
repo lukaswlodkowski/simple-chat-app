@@ -1,16 +1,18 @@
 package org.example.chat.command
 
 import io.ktor.websocket.*
-import org.example.chat.SessionManager
 
-class MessageCommandProcessor(private val sessionManager: SessionManager) {
+class MessageCommandProcessor(private val exitCommand: ExitCommand) {
     suspend fun process(message: String, session: WebSocketSession) {
-        if (message.startsWith("/")) {
-            if (message == "/exit") {
-                sessionManager.removeSession(session)
-            }
+        when (message.lowercase()) {
+            Command.EXIT.name -> exitCommand.executeCommand(session)
+            else -> throw Exception("Unknown command")
         }
     }
 
     fun isCommand(message: String) = message.startsWith("/")
+}
+
+enum class Command(name: String) {
+    EXIT("/exit")
 }
