@@ -1,19 +1,20 @@
 package org.example.chat
 
 import io.ktor.websocket.*
-import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 
 class SessionManager {
     companion object {
-        val sessions = Collections.synchronizedSet<WebSocketSession>(LinkedHashSet())
+        val sessions = ConcurrentHashMap<String, WebSocketSession>()
     }
 
-    fun addSession(session: WebSocketSession) {
-        sessions.add(session)
+    fun addSession(username: String, session: WebSocketSession) {
+        sessions[username] = session
     }
 
-    suspend fun removeSession(session: WebSocketSession) {
-        session.close(CloseReason(CloseReason.Codes.NORMAL, "Exited"))
-        sessions.remove(session)
+    suspend fun removeSession(username: String) {
+        val session = sessions[username]
+        session?.close(CloseReason(CloseReason.Codes.NORMAL, "Exited"))
+        sessions.remove(username)
     }
 }
