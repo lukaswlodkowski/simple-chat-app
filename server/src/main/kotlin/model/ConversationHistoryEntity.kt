@@ -14,8 +14,7 @@ data class ConversationHistoryEntity(
     val id: UUID = UUID.randomUUID(),
     @Serializable(with = UUIDSerializer::class)
     val chatId: UUID = UUID.randomUUID(),
-    @Serializable(with = UUIDSerializer::class)
-    val userId: UUID = UUID.randomUUID(),
+    val userId: String,
     val message: String,
     @Serializable(with = LocalDateTimeSerializer::class)
     val messageTime: LocalDateTime
@@ -24,7 +23,7 @@ data class ConversationHistoryEntity(
 object ConversationHistoryTable : Table() {
     val id = uuid("id")
     val chatId = uuid("chatId")
-    val userId = uuid("userId")
+    val userId = varchar("userId", 16)
     val message = varchar("message", 256)
     val messageTime = datetime("message_date_time")
 

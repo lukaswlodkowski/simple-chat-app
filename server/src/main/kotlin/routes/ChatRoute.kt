@@ -25,10 +25,12 @@ fun Routing.chatRoute(
             connections += thisConnection
             try {
                 send("You are connected! There are ${connections.count()} users here.")
+                val historyLog = historyService.getHistoryLog(5)
+                historyLog.reversed().forEach { send("[${it.userId}]: ${it.message}") }
                 for (frame in incoming) {
                     frame as? Frame.Text ?: continue
                     val receivedText = frame.readText()
-                    historyService.createHistoryLog(receivedText)
+                    historyService.createHistoryLog(thisConnection.name, receivedText)
                     if (receivedText.startsWith("/")) {
                         commandProcessor.executeCommand(receivedText, thisConnection.name)
                     } else {
