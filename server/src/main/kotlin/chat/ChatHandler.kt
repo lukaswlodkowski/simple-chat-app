@@ -22,10 +22,10 @@ class ChatHandler(
             for (frame in session.incoming) {
                 frame as? Frame.Text ?: continue
                 val receivedText = frame.readText()
-                historyService.createHistoryLog(username, receivedText) //TODO: Exclude commands from history
                 if (receivedText.startsWith("/")) {
                     commandProcessor.executeCommand(receivedText, username)
                 } else {
+                    historyService.createHistoryLog(username, receivedText)
                     messageSender.sendToAll(username, receivedText)
                 }
             }
