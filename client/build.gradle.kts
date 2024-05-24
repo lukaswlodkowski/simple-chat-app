@@ -1,4 +1,5 @@
-val ktor_version: String by project
+val ktorVersion: String by project
+val oauthVersion: String by project
 
 plugins {
     application
@@ -21,9 +22,10 @@ tasks.named<JavaExec>("run") {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-core:$ktor_version")
-    implementation("io.ktor:ktor-client-cio:$ktor_version")
-    implementation("io.ktor:ktor-client-websockets:$ktor_version")
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-cio:$ktorVersion")
+    implementation("io.ktor:ktor-client-websockets:$ktorVersion")
+    implementation("com.auth0:java-jwt:$oauthVersion")
     testImplementation(kotlin("test"))
 }
 

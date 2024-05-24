@@ -1,12 +1,10 @@
-package org.example.chat
+package org.example.chat.session
 
 import io.ktor.websocket.*
 import java.util.concurrent.ConcurrentHashMap
 
 class SessionManager {
-    companion object {
-        val sessions = ConcurrentHashMap<String, WebSocketSession>()
-    }
+    val sessions = ConcurrentHashMap<String, WebSocketSession>()
 
     fun addSession(username: String, session: WebSocketSession) {
         sessions[username] = session

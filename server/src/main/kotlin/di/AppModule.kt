@@ -1,6 +1,6 @@
 package di
 
-import org.example.chat.SessionManager
+import org.example.chat.session.SessionManager
 import org.example.chat.command.ExitCommand
 import org.example.chat.command.KickCommand
 import org.example.chat.command.MessageCommandProcessor
