@@ -8,13 +8,16 @@ import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
 
+const val authName = "auth-jwt"
+
 fun Application.configureAuth() {
     val secret = environment.config.property("jwt.secret").getString()
     val issuer = environment.config.property("jwt.issuer").getString()
     val audience = environment.config.property("jwt.audience").getString()
     val myRealm = environment.config.property("jwt.realm").getString()
+
     install(Authentication) {
-        jwt("auth-jwt") {
+        jwt(authName) {
             realm = myRealm
             verifier(
                 JWT
