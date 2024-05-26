@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
     val token = generateToken(args.first())
     println("Token $token")
     runBlocking {
-        client.webSocket(method = HttpMethod.Get, host = "127.0.0.1", port = 8080, path = "/chat", {
+        client.webSocket(method = HttpMethod.Get, host = "127.0.0.1", port = 8080, path = "/chat/${args[1]}", {
             header(
                 HttpHeaders.Authorization,
                 "Bearer $token"

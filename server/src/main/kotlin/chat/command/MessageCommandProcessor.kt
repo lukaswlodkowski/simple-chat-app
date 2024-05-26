@@ -8,13 +8,19 @@ class MessageCommandProcessor(
 ) : CommandProcessor {
     private val logger = KtorSimpleLogger(this::class.java.simpleName)
 
-    override suspend fun executeCommand(command: String, username: String) {
+    override suspend fun executeCommand(commandWithMetadata: String) {
+        val parts = commandWithMetadata.split("-")
+        val chatId = parts[0].lowercase()
+        val username = parts[1].lowercase()
+        val command = parts[2].lowercase()
+        val commandParts = command.split(" ")
+        val commandBase = commandParts[0].lowercase()
+        val commandArgs = commandParts[1].lowercase()
         logger.info("User $username is executing command $command")
-        val commandBase = command.split(" ")[0].lowercase()
         when (commandBase) {
-            CommandValues.EXIT.commandName -> exitCommand.executeCommand(username)
-            CommandValues.KICK.commandName -> kickCommand.executeCommand(command)
-            else -> throw Exception("Unknown command")
+            CommandValues.EXIT.commandName -> exitCommand.executeCommand(chatId, username)
+            CommandValues.KICK.commandName -> kickCommand.executeCommand(chatId, commandArgs)
+            else -> throw Exception("Unknown command: $commandBase")
         }
     }
 }

@@ -7,9 +7,9 @@ import io.ktor.util.logging.*
 
 class UserResolver {
     private val logger = KtorSimpleLogger(this::class.java.simpleName)
-    fun resolveUser(session: DefaultWebSocketServerSession) : String {
+    fun resolveUser(session: DefaultWebSocketServerSession): User {
         val principal = session.call.principal<JWTPrincipal>()
         logger.debug("Principal: $principal")
-        return principal!!.payload.getClaim("username").asString()
+        return User(principal!!.payload.getClaim("username").asString())
     }
 }

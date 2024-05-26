@@ -10,9 +10,10 @@ fun Routing.chatRoute(
     chatHandler: ChatHandler
 ) {
     authenticate(authName) {
-        route("/chat") {
+        route("/chat/{id}") {
             webSocket {
-                chatHandler.handle(this)
+                val chatId = call.parameters["id"] ?: throw Exception("Chat id was not passed as a parameter.")
+                chatHandler.handle(this, chatId)
             }
         }
     }
