@@ -4,7 +4,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.*
 import kotlinx.coroutines.Dispatchers
-import org.example.model.ConversationHistoryTable
+import org.example.chat.history.model.ConversationHistoryTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction

@@ -16,17 +16,17 @@ class ChatHandler(
     private val logger = KtorSimpleLogger(this::class.java.simpleName)
 
     suspend fun handle(session: DefaultWebSocketServerSession) {
-        val username = userManager.userJoinedChat(session)
+        val user = userManager.userJoinedChat(session)
         try {
-            initialMessages(username)
+            initialMessages(user.name)
             for (frame in session.incoming) {
                 frame as? Frame.Text ?: continue
                 val receivedText = frame.readText()
                 if (receivedText.startsWith("/")) {
-                    commandProcessor.executeCommand(receivedText, username)
+                    commandProcessor.executeCommand(receivedText, user.name)
                 } else {
-                    historyService.createHistoryLog(username, receivedText)
-                    messageSender.sendToAll(username, receivedText)
+                    historyService.createHistoryLog(user.name, receivedText)
+                    messageSender.sendToAll(user.name, receivedText)
                 }
             }
         } catch (e: Exception) {

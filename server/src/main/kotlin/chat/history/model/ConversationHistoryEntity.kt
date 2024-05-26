@@ -1,4 +1,4 @@
-package org.example.model
+package org.example.chat.history.model
 
 import kotlinx.serialization.Serializable
 import org.example.configuration.LocalDateTimeSerializer

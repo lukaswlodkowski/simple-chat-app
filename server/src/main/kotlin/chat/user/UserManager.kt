@@ -13,12 +13,12 @@ class UserManager(
 
     private val logger = KtorSimpleLogger(this::class.java.simpleName)
 
-    fun userJoinedChat(session: DefaultWebSocketServerSession): String {
+    fun userJoinedChat(session: DefaultWebSocketServerSession): User {
         userCounter.getAndIncrement()
         val username = userResolver.resolveUser(session)
         logger.info("User: $username joined chat!")
         sessionManager.addSession(username, session)
-        return username
+        return User(username)
     }
 
     suspend fun userLeftChat(session: DefaultWebSocketServerSession) {

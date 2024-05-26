@@ -1,12 +1,12 @@
 package org.example.chat.history
 
-import org.example.model.ConversationHistoryEntity
-import org.example.model.ConversationHistoryTable
-import org.example.model.ConversationHistoryTable.chatId
-import org.example.model.ConversationHistoryTable.id
-import org.example.model.ConversationHistoryTable.message
-import org.example.model.ConversationHistoryTable.messageTime
-import org.example.model.ConversationHistoryTable.userId
+import org.example.chat.history.model.ConversationHistoryEntity
+import org.example.chat.history.model.ConversationHistoryTable
+import org.example.chat.history.model.ConversationHistoryTable.chatId
+import org.example.chat.history.model.ConversationHistoryTable.id
+import org.example.chat.history.model.ConversationHistoryTable.message
+import org.example.chat.history.model.ConversationHistoryTable.messageTime
+import org.example.chat.history.model.ConversationHistoryTable.userId
 import org.example.plugins.dbQuery
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SortOrder
