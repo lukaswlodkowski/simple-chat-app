@@ -1,11 +1,9 @@
 name: Build and Test
 
 on:
-  push:
+  pull_request:
     branches:
       - master
-    paths-ignore:
-      - 'README.md'
 
 jobs:
   build-gradle-project:
@@ -22,7 +20,7 @@ jobs:
           build-scan-terms-of-use-agree: "yes"
 
       - name: Run build
-        run: ./gradlew build
+        run: ./gradlew clean build
 
       - name: Run test
         run: ./gradlew test
